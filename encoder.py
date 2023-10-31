@@ -10,9 +10,22 @@ def encode(password):
 
     return encoded_pw
 
+def decode(encrypted):
+    """decodes an encoded string"""
+    decoded_str = ""
+    for i in encrypted:
+        char = chr(ord(i) - 3)
+        if char == "/":
+            char = "9"
+        elif char == ".":
+            char = "8"
+        elif char == "-":
+            char = "7"
+        decoded_str += char
+    return decoded_str
 
+encoded = ""
 # display menu
-
 cont = True
 
 while cont != False:
@@ -20,20 +33,21 @@ while cont != False:
     print("-------------")
     print("1. Encode")
     print("2. Decode")
-    print("3. Quit")
+    print("3. Quit\n")
 
     # prompt for input
     option = int(input("Please enter an option: "))
-    password = input("Please enter your password to encode: ")
 
     if option == 1:
-        encode(password)
-        print("Your password has been encoded and stored!")
+        password = input("Please enter your password to encode: ")
+        encoded = encode(password)
+        print("Your password has been encoded and stored!\n")
 
-    if option == 2:
-        decode(encoded_pw)
-        print(f"The encoded password is {encoded_pw} and the original password is {decoded_pw}.")
-    if option == 3:
+    elif option == 2:
+        decoded = decode(encoded)
+        print(f"The encoded password is {encoded}, and the original password is {decoded}.\n")
+
+    elif option == 3:
         cont = False
 
 
